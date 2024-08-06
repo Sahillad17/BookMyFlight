@@ -1,6 +1,6 @@
 package com.bookmyflight.enums;
 
-public enum bookingstatus {
+public enum Bookingstatus {
 	PENDING,
 	BOOKED,
 	CANCELLED

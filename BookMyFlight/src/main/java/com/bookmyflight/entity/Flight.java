@@ -16,7 +16,10 @@ import jakarta.persistence.Table;
 public class Flight {
 	@Id
 	@GeneratedValue(generator = "flight_seq",strategy=GenerationType.SEQUENCE)
-	private int flightNumber;
+	@Column(name="flight_id")
+	private int flightId;
+	@Column(name="flight_no")
+	private int flightNo;
 	private String departure;
 	private String arrival;
 	@Column(name="flight_date")
@@ -25,7 +28,8 @@ public class Flight {
 	private LocalTime arrivalTime;
 	@Column(name="departure_time")
 	private LocalTime departureTime;
-	private double price; 
+	private double price;
+	@Column(name="availabele_seats")
 	private int availableSeats;
 	private String airline;
 
@@ -35,13 +39,14 @@ public class Flight {
 	}
 
 
-	public Flight(int flightNumber, String departure, String arrival, LocalDate flightDate, LocalTime arrivalTime,
-			LocalTime departureTime, double price, int availableSeats, String airline) {
+	public Flight(int flightId, int flightNo, String departure, String arrival, LocalDate flightDate,
+			LocalTime arrivalTime, LocalTime departureTime, double price, int availableSeats, String airline) {
 		super();
-		this.flightNumber = flightNumber;
+		this.flightId = flightId;
+		this.flightNo = flightNo;
 		this.departure = departure;
 		this.arrival = arrival;
-		this.flightDate = flightDate ;
+		this.flightDate = flightDate;
 		this.arrivalTime = arrivalTime;
 		this.departureTime = departureTime;
 		this.price = price;
@@ -50,13 +55,23 @@ public class Flight {
 	}
 
 
-	public int getFlightNumber() {
-		return flightNumber;
+	public int getFlightId() {
+		return flightId;
 	}
 
 
-	public void setFlightNumber(int flightNumber) {
-		this.flightNumber = flightNumber;
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+
+
+	public int getFlightNo() {
+		return flightNo;
+	}
+
+
+	public void setFlightNo(int flightNo) {
+		this.flightNo = flightNo;
 	}
 
 
@@ -142,10 +157,12 @@ public class Flight {
 
 	@Override
 	public String toString() {
-		return "Flight [flightNumber=" + flightNumber + ", departure=" + departure + ", arrival=" + arrival
-				+ ", flightDate=" + flightDate + ", arrivalTime=" + arrivalTime + ", departureTime=" + departureTime
-				+ ", price=" + price + ", availableSeats=" + availableSeats + ", airline=" + airline + "]";
+		return "Flight [flightId=" + flightId + ", flightNo=" + flightNo + ", departure=" + departure + ", arrival="
+				+ arrival + ", flightDate=" + flightDate + ", arrivalTime=" + arrivalTime + ", departureTime="
+				+ departureTime + ", price=" + price + ", availableSeats=" + availableSeats + ", airline=" + airline
+				+ "]";
 	}
 	
 	
+
 }

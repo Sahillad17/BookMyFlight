@@ -1,28 +1,33 @@
 package com.bookmyflight.entity;
 
-import com.bookmyflight.enums.bookingstatus;
-
+import com.bookmyflight.enums.Bookingstatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name="flight_booking")
-@SequenceGenerator(name="booking_seq",sequenceName = "booking_seq",initialValue = 2001)
-public class Booking {
-	@Id
-	@GeneratedValue(generator = "booking_seq",strategy = GenerationType.SEQUENCE)
-	@Column(name="booking_id")
-	private int bookingId;
-	@Column(name="user_id")
-	private int userId;
-	@Column(name="flight_id")
-	private int flightId;
-	@Column(name="booking_date")
+	@Entity
+	@Table(name="flight_booking")
+	@SequenceGenerator(name="booking_seq",sequenceName = "booking_seq",initialValue = 2001)
+	public class Booking {
+		@Id
+		@GeneratedValue(generator = "booking_seq",strategy = GenerationType.SEQUENCE)
+		@Column(name="booking_id")
+		private int bookingId;
+		@ManyToOne
+		@JoinColumn(name="user_id",referencedColumnName = "user_id")
+		@Column(name="user_id")
+		private User userId;
+		@Column(name="flight_id")
+		@ManyToOne
+		@JoinColumn(name="flight_id",referencedColumnName = "flight_id")
+		private Flight flightId;
+		@Column(name="booking_date")
 	private String bookingDate;
 	@Column(name="passanger_name")
 	private String passangerName;
@@ -30,14 +35,14 @@ public class Booking {
 	private int noOfSeat;
 	@Column(name="total_price")
 	private double totalPrice;
-	private bookingstatus status;
+	private Bookingstatus status;
 	
 	public Booking() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(int bookingId, int userId, int flightId, String bookingDate, String passangerName, int noOfSeat,
-			double totalPrice, bookingstatus status) {
+	public Booking(int bookingId, User userId, Flight flightId, String bookingDate, String passangerName, int noOfSeat,
+			double totalPrice, Bookingstatus status) {
 		super();
 		this.bookingId = bookingId;
 		this.userId = userId;
@@ -57,19 +62,19 @@ public class Booking {
 		this.bookingId = bookingId;
 	}
 
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
-	public int getFlightId() {
+	public Flight getFlightId() {
 		return flightId;
 	}
 
-	public void setFlightId(int flightId) {
+	public void setFlightId(Flight flightId) {
 		this.flightId = flightId;
 	}
 
@@ -105,11 +110,11 @@ public class Booking {
 		this.totalPrice = totalPrice;
 	}
 
-	public bookingstatus getStatus() {
+	public Bookingstatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(bookingstatus status) {
+	public void setStatus(Bookingstatus status) {
 		this.status = status;
 	}
 
@@ -119,6 +124,8 @@ public class Booking {
 				+ bookingDate + ", passangerName=" + passangerName + ", noOfSeat=" + noOfSeat + ", totalPrice="
 				+ totalPrice + ", status=" + status + "]";
 	}
+	
+	
 	
 	
 }

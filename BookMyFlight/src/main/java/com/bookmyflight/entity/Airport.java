@@ -6,13 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ariports")
+@Table(name="airports")
+@SequenceGenerator(name="airport_seq",sequenceName = "airport_seq",initialValue = 3001)
 public class Airport {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
+	@GeneratedValue(generator ="airport_seq",strategy =GenerationType.SEQUENCE)	
+	@Column(name="airport_id")
 	private int aid;
 	@Column(name="airport_code")
 	private String airportCode;
